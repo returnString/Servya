@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloWorld", "Samples\Hello
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccountBackend", "Samples\AccountBackend\AccountBackend.csproj", "{9157EA6F-5C72-433B-AC49-296263882F69}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LowLevel", "Samples\LowLevel\LowLevel.csproj", "{E28ED741-6321-4184-9936-BB1F38A1842F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,12 +35,17 @@ Global
 		{9157EA6F-5C72-433B-AC49-296263882F69}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9157EA6F-5C72-433B-AC49-296263882F69}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9157EA6F-5C72-433B-AC49-296263882F69}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E28ED741-6321-4184-9936-BB1F38A1842F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E28ED741-6321-4184-9936-BB1F38A1842F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E28ED741-6321-4184-9936-BB1F38A1842F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E28ED741-6321-4184-9936-BB1F38A1842F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{8D89D9FD-794E-46DB-8DCA-B6CD1FCA9B97} = {2DB606AA-9E52-46A6-B899-9CE6F8F5F0C4}
 		{9157EA6F-5C72-433B-AC49-296263882F69} = {2DB606AA-9E52-46A6-B899-9CE6F8F5F0C4}
+		{E28ED741-6321-4184-9936-BB1F38A1842F} = {2DB606AA-9E52-46A6-B899-9CE6F8F5F0C4}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = Samples\AccountBackend\AccountBackend.csproj
+		StartupItem = Samples\LowLevel\LowLevel.csproj
 	EndGlobalSection
 EndGlobal

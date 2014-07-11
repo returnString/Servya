@@ -4,7 +4,7 @@ namespace Servya
 {
 	public static class App
 	{
-		public static void DevRun()
+		public static void Run()
 		{
 			App.Run(new Host<Config>(), Config.DevDefault);
 		}
