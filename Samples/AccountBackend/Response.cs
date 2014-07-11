@@ -4,11 +4,18 @@ namespace AccountBackend
 {
 	public class Response
 	{
-		public Status Status { get; set; }
+		public Status Status { get; private set; }
+		public string Info { get; private set; }
+
+		public Response(Status status)
+		{
+			Status = status;
+			Info = status.ToString();
+		}
 
 		public static implicit operator Response(Status status)
 		{
-			return new Response { Status = status };
+			return new Response(status);
 		}
 	}
 
@@ -16,14 +23,20 @@ namespace AccountBackend
 	{
 		public T Payload { get; set; }
 
+		public Response(T payload, Status status)
+			: base(status)
+		{
+			Payload = payload;
+		}
+
 		public static implicit operator Response<T>(T payload)
 		{
-			return new Response<T> { Payload = payload };
+			return new Response<T>(payload, Status.Ok);
 		}
 
 		public static implicit operator Response<T>(Status status)
 		{
-			return new Response<T> { Status = status };
+			return new Response<T>(default(T), status);
 		}
 	}
 
