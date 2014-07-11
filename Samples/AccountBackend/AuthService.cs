@@ -19,7 +19,7 @@ namespace AccountBackend
 			m_tokenTTL = TimeSpan.FromMinutes(10);
 		}
 
-		[JsonRoute]
+		[JsonRoute(Verb = HttpVerb.Post)]
 		public async Task<Response> Register(string name, string password)
 		{
 			var key = UserKey(name);
@@ -36,7 +36,7 @@ namespace AccountBackend
 			return Status.UnknownError;
 		}
 
-		[JsonRoute]
+		[JsonRoute(Verb = HttpVerb.Post)]
 		public async Task<Response<string>> Login(string name, string password)
 		{
 			var key = UserKey(name);
