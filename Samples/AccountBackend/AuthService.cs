@@ -1,9 +1,9 @@
-﻿using Servya;
+﻿using System;
 using System.Security.Cryptography;
-using System.Threading.Tasks;
-using StackExchange.Redis;
 using System.Text;
-using System;
+using System.Threading.Tasks;
+using Servya;
+using StackExchange.Redis;
 
 namespace AccountBackend
 {
@@ -26,8 +26,8 @@ namespace AccountBackend
 			m_tokenTTL = TimeSpan.FromMinutes(10);
 		}
 
-		[Route]
-		public async Task<RegistrationStatus> Register(string name, string password)
+		[JsonRoute]
+		public async Task<Response> Register(string name, string password)
 		{
 			var key = UserKey(name);
 
@@ -36,16 +36,16 @@ namespace AccountBackend
 			transaction.HashSetAsync(key, "password", PasswordHash(password)).Forget();
 
 			if (await transaction.ExecuteAsync())
-				return RegistrationStatus.Ok;
+				return Status.Ok;
 
 			if (!nameNotTaken.WasSatisfied)
-				return RegistrationStatus.NameTaken;
+				return Status.NameTaken;
 
-			return RegistrationStatus.UnknownError;
+			return Status.UnknownError;
 		}
 
-		[Route]
-		public async Task<string> Login(string name, string password)
+		[JsonRoute]
+		public async Task<Response<string>> Login(string name, string password)
 		{
 			var key = UserKey(name);
 
@@ -58,13 +58,16 @@ namespace AccountBackend
 				return token;
 			}
 
-			return "fail";
+			return Status.InvalidCredentials;
 		}
 
-		[Route]
-		public async Task<bool> Verify(string token)
+		[JsonRoute]
+		public async Task<Response> Verify(string token)
 		{
-			return await m_db.KeyExistsAsync(TokenKey(token));
+			if (await m_db.KeyExistsAsync(TokenKey(token)))
+				return Status.Ok;
+
+			return Status.TokenExpired;
 		}
 
 		private byte[] PasswordHash(string password)

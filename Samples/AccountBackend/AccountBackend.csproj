@@ -32,10 +32,15 @@
     <Reference Include="StackExchange.Redis">
       <HintPath>..\Libs\StackExchange.Redis.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\Libs\Newtonsoft.Json.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="AuthService.cs" />
+    <Compile Include="JsonRoute.cs" />
+    <Compile Include="Response.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
