@@ -138,6 +138,7 @@ namespace Servya
 			return sb.ToString();
 		}
 
+		// Serialisation: https://gist.github.com/brettz9/7147458
 		private const string JS =
 		@"<head>
 			<style>

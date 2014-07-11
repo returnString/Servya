@@ -44,7 +44,6 @@ namespace AccountBackend
 			if (!nameNotTaken.WasSatisfied)
 				return RegistrationStatus.NameTaken;
 
-
 			return RegistrationStatus.UnknownError;
 		}
 
