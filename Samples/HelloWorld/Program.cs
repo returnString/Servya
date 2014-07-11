@@ -23,7 +23,8 @@ namespace HelloWorld
 			return "Apologies for keeping you waiting, " + name;
 		}
 
-		static void Main(string[] args)
+		// This is the really long explanation that introduces various Servya components
+		static void Main()
 		{
 			// Routers control the raw map from endpoints to actions
 			var router = new Router();
