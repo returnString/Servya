@@ -8,9 +8,11 @@ namespace AccountBackend
 		static void Main()
 		{
 			var host = new AccountBackendHost();
-			var config = new AccountBackendConfig();
-			config.Http = HttpConfig.DevDefault;
-			config.RedisServer = "127.0.0.1";
+			var config = new AccountBackendConfig
+			{
+				Http = HttpConfig.DevDefault,
+				RedisServer = "127.0.0.1"
+			};
 
 			App.Run(host, config);
 		}

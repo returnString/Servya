@@ -7,13 +7,6 @@ using StackExchange.Redis;
 
 namespace AccountBackend
 {
-	public enum RegistrationStatus
-	{
-		Ok,
-		UnknownError,
-		NameTaken,
-	}
-
 	[Service]
 	public class AuthService
 	{
@@ -30,7 +23,6 @@ namespace AccountBackend
 		public async Task<Response> Register(string name, string password)
 		{
 			var key = UserKey(name);
-
 			var transaction = m_db.CreateTransaction();
 			var nameNotTaken = transaction.AddCondition(Condition.KeyNotExists(key));
 			transaction.HashSetAsync(key, "password", PasswordHash(password)).Forget();
@@ -48,7 +40,6 @@ namespace AccountBackend
 		public async Task<Response<string>> Login(string name, string password)
 		{
 			var key = UserKey(name);
-
 			var storedPassword = await m_db.HashGetAsync(key, "password");
 
 			if (storedPassword == PasswordHash(password))
