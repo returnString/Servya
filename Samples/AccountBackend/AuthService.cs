@@ -55,7 +55,7 @@ namespace AccountBackend
 		[JsonRoute]
 		public async Task<Response> Verify(string token)
 		{
-			if (await m_db.KeyExistsAsync(TokenKey(token)))
+			if (await m_db.KeyExpireAsync(TokenKey(token), m_tokenTTL))
 				return Status.Ok;
 
 			return Status.TokenExpired;
