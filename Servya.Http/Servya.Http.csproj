@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8D440E3F-3F48-4130-B65A-89263AEDBFC6}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Servya.Http</RootNamespace>
+    <AssemblyName>Servya.Http</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Listening\AsyncHttpListener.cs" />
+    <Compile Include="Listening\HttpListenerImpl\Context.cs" />
+    <Compile Include="Listening\HttpListenerImpl\Request.cs" />
+    <Compile Include="Listening\HttpListenerImpl\Response.cs" />
+    <Compile Include="Listening\HttpVerb.cs" />
+    <Compile Include="Listening\IHttpContext.cs" />
+    <Compile Include="Listening\IHttpProcessor.cs" />
+    <Compile Include="Listening\IHttpRequest.cs" />
+    <Compile Include="Listening\IHttpResponse.cs" />
+    <Compile Include="Routing\AutoRouter.cs" />
+    <Compile Include="Routing\IQueryValidator.cs" />
+    <Compile Include="Routing\Route.cs" />
+    <Compile Include="Routing\RouteAction.cs" />
+    <Compile Include="Routing\RouteAttribute.cs" />
+    <Compile Include="Routing\RouteError.cs" />
+    <Compile Include="Routing\Router.cs" />
+    <Compile Include="Routing\ServiceAttribute.cs" />
+    <Compile Include="Routing\WebInterface.cs" />
+    <Compile Include="Extensions\HttpContextExtensions.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <ProjectReference Include="..\Servya\Servya.csproj">
+      <Project>{1CC8E373-326F-4CA9-BF80-E28180580747}</Project>
+      <Name>Servya</Name>
+    </ProjectReference>
+  </ItemGroup>
+</Project>
