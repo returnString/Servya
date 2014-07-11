@@ -43,7 +43,7 @@ namespace AccountBackend
 	public enum Status
 	{
 		Ok,
-		UnknownError,
+		InternalError,
 		NameTaken,
 		InvalidCredentials,
 		TokenExpired

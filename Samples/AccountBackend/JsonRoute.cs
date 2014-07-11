@@ -17,7 +17,7 @@ namespace AccountBackend
 
 		public override object HandleError(RouteError error)
 		{
-			return Transform(new Response<RouteError>(error, Status.UnknownError));
+			return Transform(new Response<RouteError>(error, Status.InternalError));
 		}
 	}
 }

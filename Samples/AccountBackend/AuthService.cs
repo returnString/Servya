@@ -33,7 +33,7 @@ namespace AccountBackend
 			if (!nameNotTaken.WasSatisfied)
 				return Status.NameTaken;
 
-			return Status.UnknownError;
+			return Status.InternalError;
 		}
 
 		[JsonRoute(Verb = HttpVerb.Post)]
