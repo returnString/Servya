@@ -3,6 +3,7 @@ using System.Security.Cryptography;
 using System.Threading.Tasks;
 using StackExchange.Redis;
 using System.Text;
+using System;
 
 namespace AccountBackend
 {
@@ -13,20 +14,16 @@ namespace AccountBackend
 		NameTaken,
 	}
 
-	public enum AuthStatus
-	{
-		Ok,
-		Failed
-	}
-
 	[Service]
 	public class AuthService
 	{
 		private readonly IDatabase m_db;
+		private readonly TimeSpan m_tokenTTL;
 
 		public AuthService(IDatabase db)
 		{
 			m_db = db;
+			m_tokenTTL = TimeSpan.FromMinutes(10);
 		}
 
 		[Route]
@@ -48,16 +45,26 @@ namespace AccountBackend
 		}
 
 		[Route]
-		public async Task<AuthStatus> Login(string name, string password)
+		public async Task<string> Login(string name, string password)
 		{
 			var key = UserKey(name);
 
 			var storedPassword = await m_db.HashGetAsync(key, "password");
 
 			if (storedPassword == PasswordHash(password))
-				return AuthStatus.Ok;
+			{
+				var token = Guid.NewGuid().ToString();
+				await m_db.StringSetAsync(TokenKey(token), name, m_tokenTTL);
+				return token;
+			}
 
-			return AuthStatus.Failed;
+			return "fail";
+		}
+
+		[Route]
+		public async Task<bool> Verify(string token)
+		{
+			return await m_db.KeyExistsAsync(TokenKey(token));
 		}
 
 		private byte[] PasswordHash(string password)
@@ -72,6 +79,11 @@ namespace AccountBackend
 		private string UserKey(string name)
 		{
 			return "user:" + name;
+		}
+
+		private string TokenKey(string token)
+		{
+			return "token:" + token;
 		}
 	}
 }
