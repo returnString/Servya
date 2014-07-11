@@ -67,6 +67,7 @@
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Threading\AsyncQueueProcessor.cs" />
     <Compile Include="Threading\ScopedLock.cs" />
+    <Compile Include="Extensions\TaskExtensions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
