@@ -1,7 +1,7 @@
 # Servya
 Servya is a framework designed for developing servers using .NET and Mono. Its main focus is building web APIs.
 
-Master: [![Build Status](https://travis-ci.org/returnString/Servya.svg?branch=master)](https://travis-ci.org/returnString/Servya)
+[![Build Status](https://travis-ci.org/returnString/Servya.svg?branch=master)](https://travis-ci.org/returnString/Servya)
 
 # Features
 
