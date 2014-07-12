@@ -1,4 +1,6 @@
-﻿using Servya;
+﻿using System.Threading.Tasks;
+using Newtonsoft.Json;
+using Servya;
 using StackExchange.Redis;
 
 namespace AccountBackend
@@ -7,13 +9,15 @@ namespace AccountBackend
 	{
 		static void Main()
 		{
-			var host = new AccountBackendHost();
-			var config = new AccountBackendConfig
-			{
-				Http = HttpConfig.DevDefault,
-				RedisServer = "127.0.0.1"
-			};
+			MainImpl().Wait();
+		}
 
+		static async Task MainImpl()
+		{
+			var configFile = await FileIO.OpenRead("config.json").ReadAllAsync();
+			var config = JsonConvert.DeserializeObject<AccountBackendConfig>(configFile);
+
+			var host = new AccountBackendHost();
 			App.Run(host, config);
 		}
 	}

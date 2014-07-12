@@ -53,4 +53,9 @@
       <Name>Servya.Http</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="config.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>

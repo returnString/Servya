@@ -11,5 +11,15 @@ namespace Servya
 		{
 			return new FileStream(filename, mode, access, share, bufferSize, useAsync: true);
 		}
+
+		public static FileStream OpenRead(string filename, int bufferSize = DefaultBufferSize)
+		{
+			return Open(filename, FileMode.Open, FileAccess.Read, FileShare.Read, bufferSize);
+		}
+
+		public static FileStream OpenWrite(string filename, bool overwrite = false, int bufferSize = DefaultBufferSize)
+		{
+			return Open(filename, overwrite ? FileMode.Create : FileMode.OpenOrCreate, FileAccess.Write, FileShare.Read);
+		}
 	}
 }
