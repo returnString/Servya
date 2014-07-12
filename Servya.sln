@@ -46,6 +46,6 @@ Global
 		{E28ED741-6321-4184-9936-BB1F38A1842F} = {2DB606AA-9E52-46A6-B899-9CE6F8F5F0C4}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = Samples\LowLevel\LowLevel.csproj
+		StartupItem = Samples\AccountBackend\AccountBackend.csproj
 	EndGlobalSection
 EndGlobal
