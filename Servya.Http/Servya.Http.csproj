@@ -55,6 +55,7 @@
     <Compile Include="Hosting\Host.cs" />
     <Compile Include="Hosting\HttpConfig.cs" />
     <Compile Include="Hosting\Config.cs" />
+    <Compile Include="Hosting\App.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
