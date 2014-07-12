@@ -37,7 +37,7 @@ namespace Servya
 			}
 		}
 
-		public void Start(Func<SynchronizationContext> syncContext, int concurrentAccepts, int maxDelayMS = -1)
+		public void Start(Func<SynchronizationContext> syncContext, int concurrentAccepts, int maxDelayMS = 0)
 		{
 			m_logger.Info("Listening on {0} with {1} concurrent accepts", m_listener.Prefixes.First(), concurrentAccepts);
 			m_listener.Start();

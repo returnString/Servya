@@ -25,11 +25,11 @@ namespace Servya
 
 		private void InitHttp(HttpConfig config)
 		{
-			var listener = new AsyncHttpListener(Router, port: config.Port, securePort: config.SslPort);
+			var listener = new AsyncHttpListener(Router, port: config.Port, securePort: config.SecurePort);
 			var autoRouter = new AutoRouter(Router, new Parser(), Resolver);
 			autoRouter.Discover();
 			autoRouter.CreateWebInterface();
-			listener.Start(() => new EventLoopContext(), Environment.ProcessorCount);
+			listener.Start(() => new EventLoopContext(), Environment.ProcessorCount, config.MaxDelay);
 		}
 	}
 }
