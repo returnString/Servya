@@ -27,4 +27,5 @@ class GreeterService
 ```
 
 http://host/greeter/sayhi?name=ruan: `{ "Code": 0, "Info": "Ok", "Payload": "Hey there, ruan" }`
+
 http://host/greeter/sayhi?name=bob: `{ "Code": 1, "Info": "WeHateBob" }`
