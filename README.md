@@ -38,3 +38,16 @@ class ProgramService
 	}
 }
 ```
+
+# Building
+Servya requires either .NET 4.5 or Mono 3.4. You can find out what version of Mono you have with `mono --version`.
+
+```bash
+git clone https://github.com/returnString/Servya.git
+cd Servya
+```
+
+* Mono: `xbuild Servya.sln /p:Configuration=Release`
+* Windows: `msbuild Servya.sln /p:Configuration=Release`
+
+Or just open the solution file in Xamarin Studio/Visual Studio.
