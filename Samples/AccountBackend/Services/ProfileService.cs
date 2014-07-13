@@ -21,7 +21,7 @@ namespace AccountBackend
 			var hashes = await m_db.HashGetAllAsync(Keys.User(user));
 			var data = hashes.ToStringDictionary();
 
-			return new ProfileInfo { Name = user, JoinDate = long.Parse(data["joindate"]) };
+			return new ProfileInfo { Name = user, JoinDate = long.Parse(data["joindate"]), Country = data["country"] };
 		}
 	}
 }

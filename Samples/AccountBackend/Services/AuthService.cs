@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Net;
+using System.Net.Http;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using Servya;
 using StackExchange.Redis;
+using Newtonsoft.Json;
 
 namespace AccountBackend
 {
@@ -12,15 +15,19 @@ namespace AccountBackend
 	{
 		private readonly IDatabase m_db;
 		private readonly TimeSpan m_tokenTTL;
+		private readonly HttpClient m_client;
+		private readonly CategoryLogger m_logger;
 
 		public AuthService(IDatabase db)
 		{
+			m_logger = new CategoryLogger(this);
 			m_db = db;
 			m_tokenTTL = TimeSpan.FromMinutes(10);
+			m_client = new HttpClient { BaseAddress = new Uri("http://freegeoip.net/json/") };
 		}
 
 		[UnprotectedRoute(Verb = HttpVerb.Post)]
-		public async Task<Response> Register(string name, string password)
+		public async Task<Response> Register(string name, string password, IHttpContext context)
 		{
 			var key = Keys.User(name);
 			var transaction = m_db.CreateTransaction();
@@ -28,7 +35,9 @@ namespace AccountBackend
 
 			transaction.HashSetAsync(key,
 				"password", PasswordHash(password),
-				"joindate", DateTime.UtcNow.GetUnixTime()).Forget();
+				"joindate", DateTime.UtcNow.GetUnixTime(),
+				"country", await GetCountryCode(context.Request.Client.Address)
+			).Forget();
 
 			if (await transaction.ExecuteAsync())
 				return Status.Ok;
@@ -68,6 +77,26 @@ namespace AccountBackend
 			{
 				var bytes = Encoding.UTF8.GetBytes(password);
 				return alg.ComputeHash(bytes);
+			}
+		}
+
+		private struct GeoLocationResponse
+		{
+			public string country_code;
+		}
+
+		private async Task<string> GetCountryCode(IPAddress address)
+		{
+			try
+			{
+				var response = await m_client.GetStringAsync(address.ToString());
+				var json = JsonConvert.DeserializeObject<GeoLocationResponse>(response);
+				return json.country_code;
+			}
+			catch (Exception ex)
+			{
+				m_logger.Error(ex);
+				return "RD";
 			}
 		}
 	}

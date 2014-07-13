@@ -6,6 +6,7 @@ namespace AccountBackend
 	{
 		public string Name { get; set; }
 		public long JoinDate { get; set; }
+		public string Country { get; set; }
 	}
 }
 
