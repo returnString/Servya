@@ -53,4 +53,4 @@ class ProfileService
 }
 ```
 
-The above `/profile/my` method would actually be called like `http://host/profile/my?token=blah`; the `TokenValidator` class handles the token validation before your service method is even called.
+The above `/profile/my` method would actually be called like `http://host/profile/my?token=blah`; the `TokenValidator` class handles token validation and filling in the `string user` parameter before your service method is even called.
