@@ -19,13 +19,14 @@ namespace AccountBackend
 			m_tokenTTL = TimeSpan.FromMinutes(10);
 		}
 
-		[JsonRoute(Verb = HttpVerb.Post)]
+		[UnprotectedRoute(Verb = HttpVerb.Post)]
 		public async Task<Response> Register(string name, string password)
 		{
-			var key = UserKey(name);
+			var key = Keys.User(name);
 			var transaction = m_db.CreateTransaction();
 			var nameNotTaken = transaction.AddCondition(Condition.KeyNotExists(key));
 			transaction.HashSetAsync(key, "password", PasswordHash(password)).Forget();
+			transaction.HashSetAsync(key, "joindate", DateTime.UtcNow.GetUnixTime()).Forget();
 
 			if (await transaction.ExecuteAsync())
 				return Status.Ok;
@@ -36,26 +37,26 @@ namespace AccountBackend
 			return Status.InternalError;
 		}
 
-		[JsonRoute(Verb = HttpVerb.Post)]
+		[UnprotectedRoute(Verb = HttpVerb.Post)]
 		public async Task<Response<string>> Login(string name, string password)
 		{
-			var key = UserKey(name);
+			var key = Keys.User(name);
 			var storedPassword = await m_db.HashGetAsync(key, "password");
 
 			if (storedPassword == PasswordHash(password))
 			{
 				var token = Guid.NewGuid().ToString();
-				await m_db.StringSetAsync(TokenKey(token), name, m_tokenTTL);
+				await m_db.StringSetAsync(Keys.Token(token), name, m_tokenTTL);
 				return token;
 			}
 
 			return Status.InvalidCredentials;
 		}
 
-		[JsonRoute]
+		[UnprotectedRoute]
 		public async Task<Response> Verify(string token)
 		{
-			if (await m_db.KeyExpireAsync(TokenKey(token), m_tokenTTL))
+			if (await m_db.KeyExpireAsync(Keys.Token(token), m_tokenTTL))
 				return Status.Ok;
 
 			return Status.TokenExpired;
@@ -68,16 +69,6 @@ namespace AccountBackend
 				var bytes = Encoding.UTF8.GetBytes(password);
 				return alg.ComputeHash(bytes);
 			}
-		}
-
-		private string UserKey(string name)
-		{
-			return "user:" + name;
-		}
-
-		private string TokenKey(string token)
-		{
-			return "token:" + token;
 		}
 	}
 }

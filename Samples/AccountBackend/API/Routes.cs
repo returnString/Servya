@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace AccountBackend
 {
-	public class JsonRouteAttribute : RouteAttribute
+	public class UnprotectedRouteAttribute : RouteAttribute
 	{
 		private static JsonSerializerSettings JsonSettings = new JsonSerializerSettings
 		{
@@ -17,7 +17,15 @@ namespace AccountBackend
 
 		public override object HandleError(RouteError error)
 		{
-			return Transform(new Response<RouteError>(error, Status.InternalError));
+			return Transform(new Response(error.Code, error.Message));
+		}
+	}
+
+	public class TokenRouteAttribute : UnprotectedRouteAttribute
+	{
+		public TokenRouteAttribute()
+		{
+			QueryValidatorType = typeof(TokenValidator);
 		}
 	}
 }

@@ -4,13 +4,18 @@ namespace AccountBackend
 {
 	public class Response
 	{
-		public Status Status { get; private set; }
+		public int Code { get; private set; }
 		public string Info { get; private set; }
 
-		public Response(Status status)
+		public Response(int code, string info)
 		{
-			Status = status;
-			Info = status.ToString();
+			Code = code;
+			Info = info;
+		}
+
+		public Response(Status status)
+			: this((int)status, status.ToString())
+		{
 		}
 
 		public static implicit operator Response(Status status)
@@ -31,7 +36,7 @@ namespace AccountBackend
 
 		public static implicit operator Response<T>(T payload)
 		{
-			return new Response<T>(payload, Status.Ok);
+			return new Response<T>(payload, (int)Status.Ok);
 		}
 
 		public static implicit operator Response<T>(Status status)
@@ -46,7 +51,8 @@ namespace AccountBackend
 		InternalError,
 		NameTaken,
 		InvalidCredentials,
-		TokenExpired
+		TokenExpired,
+		TokenMissing
 	}
 }
 

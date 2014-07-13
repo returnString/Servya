@@ -26,9 +26,14 @@ namespace Servya
 			Message = message;
 		}
 
+		public RouteError(Enum code)
+			: this(code, code.ToString())
+		{
+		}
+
 		public override string ToString()
 		{
-			return string.Format("(Domain: {0}) {1}", Code, Message);
+			return string.Format("{0} (code {1})", Message, Code);
 		}
 	}
 }

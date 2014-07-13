@@ -2,5 +2,7 @@
 	"Http": {
 		"Port": 1337
 	},
-	"RedisServer": "127.0.0.1"
+	"Redis": {
+		"Host": "127.0.0.1"
+	}
 }

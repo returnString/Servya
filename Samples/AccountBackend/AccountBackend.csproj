@@ -37,10 +37,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
-    <Compile Include="AuthService.cs" />
-    <Compile Include="JsonRoute.cs" />
-    <Compile Include="Response.cs" />
+    <Compile Include="Startup\Program.cs" />
+    <Compile Include="Startup\Config.cs" />
+    <Compile Include="Services\AuthService.cs" />
+    <Compile Include="API\Response.cs" />
+    <Compile Include="API\TokenValidator.cs" />
+    <Compile Include="API\Routes.cs" />
+    <Compile Include="Services\ProfileService.cs" />
+    <Compile Include="API\Keys.cs" />
+    <Compile Include="Data\ProfileInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -57,5 +62,11 @@
     <None Include="config.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Startup\" />
+    <Folder Include="Services\" />
+    <Folder Include="API\" />
+    <Folder Include="Data\" />
   </ItemGroup>
 </Project>

@@ -23,12 +23,17 @@ namespace Servya
 		{
 		}
 
+		protected virtual WebInterfaceConfig CreateInterfaceConfig()
+		{
+			return WebInterfaceConfig.Default;
+		}
+
 		private void InitHttp(HttpConfig config)
 		{
 			var listener = new AsyncHttpListener(Router, port: config.Port, securePort: config.SecurePort);
 			var autoRouter = new AutoRouter(Router, new Parser(), Resolver);
 			autoRouter.Discover();
-			autoRouter.CreateWebInterface();
+			autoRouter.CreateWebInterface(CreateInterfaceConfig());
 			listener.Start(() => new EventLoopContext(), Environment.ProcessorCount, config.MaxDelay);
 		}
 	}
