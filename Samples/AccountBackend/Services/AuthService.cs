@@ -25,8 +25,10 @@ namespace AccountBackend
 			var key = Keys.User(name);
 			var transaction = m_db.CreateTransaction();
 			var nameNotTaken = transaction.AddCondition(Condition.KeyNotExists(key));
-			transaction.HashSetAsync(key, "password", PasswordHash(password)).Forget();
-			transaction.HashSetAsync(key, "joindate", DateTime.UtcNow.GetUnixTime()).Forget();
+
+			transaction.HashSetAsync(key,
+				"password", PasswordHash(password),
+				"joindate", DateTime.UtcNow.GetUnixTime()).Forget();
 
 			if (await transaction.ExecuteAsync())
 				return Status.Ok;
@@ -43,14 +45,12 @@ namespace AccountBackend
 			var key = Keys.User(name);
 			var storedPassword = await m_db.HashGetAsync(key, "password");
 
-			if (storedPassword == PasswordHash(password))
-			{
-				var token = Guid.NewGuid().ToString();
-				await m_db.StringSetAsync(Keys.Token(token), name, m_tokenTTL);
-				return token;
-			}
+			if (storedPassword != PasswordHash(password))
+				return Status.InvalidCredentials;
 
-			return Status.InvalidCredentials;
+			var token = Guid.NewGuid().ToString();
+			await m_db.StringSetAsync(Keys.Token(token), name, m_tokenTTL);
+			return token;
 		}
 
 		[UnprotectedRoute]

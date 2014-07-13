@@ -46,6 +46,7 @@
     <Compile Include="Services\ProfileService.cs" />
     <Compile Include="API\Keys.cs" />
     <Compile Include="Data\ProfileInfo.cs" />
+    <Compile Include="Extensions\RedisExtensions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -68,5 +69,6 @@
     <Folder Include="Services\" />
     <Folder Include="API\" />
     <Folder Include="Data\" />
+    <Folder Include="Extensions\" />
   </ItemGroup>
 </Project>
