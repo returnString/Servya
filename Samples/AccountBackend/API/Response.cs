@@ -52,7 +52,8 @@ namespace AccountBackend
 		NameTaken,
 		InvalidCredentials,
 		TokenExpired,
-		TokenMissing
+		TokenMissing,
+		NotFound
 	}
 }
 

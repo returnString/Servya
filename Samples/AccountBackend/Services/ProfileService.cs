@@ -16,12 +16,21 @@ namespace AccountBackend
 		}
 
 		[TokenRoute]
-		public async Task<ProfileInfo> My(string user)
+		public Task<Response<ProfileInfo>> My(string user)
 		{
-			var hashes = await m_db.HashGetAllAsync(Keys.User(user));
+			return Find(user);
+		}
+
+		[TokenRoute]
+		public async Task<Response<ProfileInfo>> Find(string name)
+		{
+			var hashes = await m_db.HashGetAllAsync(Keys.User(name));
+			if (hashes.Length == 0)
+				return Status.NotFound;
+
 			var data = hashes.ToStringDictionary();
 
-			return new ProfileInfo { Name = user, JoinDate = long.Parse(data["joindate"]), Country = data["country"] };
+			return new ProfileInfo { Name = name, JoinDate = long.Parse(data["joindate"]), Country = data["country"] };
 		}
 	}
 }
