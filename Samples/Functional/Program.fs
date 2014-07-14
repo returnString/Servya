@@ -18,6 +18,8 @@ let addRoute (verb : HttpVerb) path (action : IHttpContext -> IDictionary<string
     router.AddRoute(verb, path, fun context args ->
         Async.StartAsTask(action context args))
 
+// Raw HTTP routes
+// http://host/test
 let testRoute (context : IHttpContext) (args : IDictionary<string, string>) = async {
     let response = context.Response
     use writer = context.GetWriter()
@@ -26,6 +28,18 @@ let testRoute (context : IHttpContext) (args : IDictionary<string, string>) = as
 }
 
 addRoute HttpVerb.Get "/test" testRoute |> ignore
+
+// Create a strongly typed service
+// http://host/functional/add?a=1&b=2
+[<Service>]
+type FunctionalService() =
+    [<Route>]
+    member x.Add a b =
+        a + b
+
+let autoRouter = AutoRouter(router, Parser(), DependencyResolver())
+autoRouter.Discover()
+autoRouter.CreateWebInterface()
 
 let newContext = Func<_>(fun () -> EventLoopContext() :> SynchronizationContext)
 processor.Start(newContext, Environment.ProcessorCount)
