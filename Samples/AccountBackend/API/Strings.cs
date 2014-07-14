@@ -19,5 +19,12 @@ namespace AccountBackend
 			return string.Join(":", args);
 		}
 	}
+
+	public static class Fields
+	{
+		public const string Password = "password";
+		public const string JoinDate = "joindate";
+		public const string Country = "country";
+	}
 }
 

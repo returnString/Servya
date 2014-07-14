@@ -45,9 +45,9 @@
     <Compile Include="API\TokenValidator.cs" />
     <Compile Include="API\Routes.cs" />
     <Compile Include="Services\ProfileService.cs" />
-    <Compile Include="API\Keys.cs" />
     <Compile Include="Data\ProfileInfo.cs" />
     <Compile Include="Extensions\RedisExtensions.cs" />
+    <Compile Include="API\Strings.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

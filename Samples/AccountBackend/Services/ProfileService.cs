@@ -30,7 +30,7 @@ namespace AccountBackend
 
 			var data = hashes.ToStringDictionary();
 
-			return new ProfileInfo { Name = name, JoinDate = long.Parse(data["joindate"]), Country = data["country"] };
+			return new ProfileInfo { Name = name, JoinDate = long.Parse(data[Fields.JoinDate]), Country = data[Fields.Country] };
 		}
 	}
 }

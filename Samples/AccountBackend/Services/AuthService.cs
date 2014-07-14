@@ -34,9 +34,9 @@ namespace AccountBackend
 			var nameNotTaken = transaction.AddCondition(Condition.KeyNotExists(key));
 
 			transaction.HashSetAsync(key,
-				"password", PasswordHash(password),
-				"joindate", DateTime.UtcNow.GetUnixTime(),
-				"country", await GetCountryCode(context.Request.Client.Address)
+				Fields.Password, PasswordHash(password),
+				Fields.Password, DateTime.UtcNow.GetUnixTime(),
+				Fields.Country, await GetCountryCode(context.Request.Client.Address)
 			).Forget();
 
 			if (await transaction.ExecuteAsync())
@@ -52,7 +52,7 @@ namespace AccountBackend
 		public async Task<Response<string>> Login(string name, string password)
 		{
 			var key = Keys.User(name);
-			var storedPassword = await m_db.HashGetAsync(key, "password");
+			var storedPassword = await m_db.HashGetAsync(key, Fields.Password);
 
 			if (storedPassword != PasswordHash(password))
 				return Status.InvalidCredentials;
