@@ -35,7 +35,7 @@ namespace AccountBackend
 
 			transaction.HashSetAsync(key,
 				Fields.Password, PasswordHash(password),
-				Fields.Password, DateTime.UtcNow.GetUnixTime(),
+				Fields.JoinDate, DateTime.UtcNow.GetUnixTime(),
 				Fields.Country, await GetCountryCode(context.Request.Client.Address)
 			).Forget();
 
@@ -80,17 +80,12 @@ namespace AccountBackend
 			}
 		}
 
-		private struct GeoLocationResponse
-		{
-			public string country_code;
-		}
-
 		private async Task<string> GetCountryCode(IPAddress address)
 		{
 			try
 			{
 				var response = await m_client.GetStringAsync(address.ToString());
-				var json = JsonConvert.DeserializeObject<GeoLocationResponse>(response);
+				dynamic json = JsonConvert.DeserializeObject(response);
 				return json.country_code;
 			}
 			catch (Exception ex)
