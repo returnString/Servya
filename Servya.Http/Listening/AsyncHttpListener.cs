@@ -39,6 +39,11 @@ namespace Servya
 
 		public void Start(Func<SynchronizationContext> syncContext, int concurrentAccepts, int maxDelayMS = 0)
 		{
+			if (concurrentAccepts <= 0)
+			{
+				throw new ArgumentOutOfRangeException("concurrentAccepts", "Expected >0 concurrent accepts");
+			}
+
 			m_logger.Info("Listening on {0} with {1} concurrent accepts", m_listener.Prefixes.First(), concurrentAccepts);
 			m_listener.Start();
 
