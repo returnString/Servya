@@ -37,6 +37,11 @@ namespace Servya
 				throw new InvalidOperationException("No HTTP config found, ensure your host config correctly specifies this");
 			}
 
+			if (httpConfig.EventLoops == 0)
+			{
+				httpConfig.EventLoops = Environment.ProcessorCount;
+			}
+
 			var listener = new AsyncHttpListener(Router, port: httpConfig.Port, securePort: httpConfig.SecurePort);
 			var autoRouter = new AutoRouter(Router, new Parser(), Resolver, Config.Debug);
 			autoRouter.Discover();
