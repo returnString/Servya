@@ -36,7 +36,7 @@ namespace Servya
 			var autoRouter = new AutoRouter(Router, new Parser(), Resolver, Config.Debug);
 			autoRouter.Discover();
 			autoRouter.CreateWebInterface(CreateInterfaceConfig());
-			listener.Start(() => new EventLoopContext(), Environment.ProcessorCount, httpConfig.MaxDelay);
+			listener.Start(() => new EventLoopContext(), httpConfig.EventLoops, httpConfig.MaxDelay);
 		}
 	}
 }
