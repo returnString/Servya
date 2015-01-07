@@ -4,6 +4,13 @@ namespace Servya
 {
 	public static class App
 	{
+		private static CategoryLogger m_logger;
+
+		static App()
+		{
+			m_logger = new CategoryLogger("App");
+		}
+
 		public static void Run()
 		{
 			App.Run(new Host<HostConfig>(), HostConfig.DevDefault);
@@ -13,8 +20,15 @@ namespace Servya
 			where THost : Host<TConfig>
 			where TConfig : HostConfig
 		{
-			host.Run(config);
-
+			try
+			{
+				host.Run(config);
+			}
+			catch (Exception ex)
+			{
+				m_logger.Error(ex);
+			}
+			
 			while (true)
 				Console.ReadLine();
 		}
