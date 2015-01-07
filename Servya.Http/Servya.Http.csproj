@@ -54,17 +54,17 @@
     <Compile Include="Extensions\HttpContextExtensions.cs" />
     <Compile Include="Hosting\Host.cs" />
     <Compile Include="Hosting\HttpConfig.cs" />
-    <Compile Include="Hosting\Config.cs" />
     <Compile Include="Hosting\App.cs" />
+    <Compile Include="Hosting\HostConfig.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="Hosting\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Servya\Servya.csproj">
       <Project>{1CC8E373-326F-4CA9-BF80-E28180580747}</Project>
       <Name>Servya</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Hosting\" />
   </ItemGroup>
 </Project>

@@ -6,12 +6,12 @@ namespace Servya
 	{
 		public static void Run()
 		{
-			App.Run(new Host<Config>(), Config.DevDefault);
+			App.Run(new Host<HostConfig>(), HostConfig.DevDefault);
 		}
 
 		public static void Run<THost, TConfig>(THost host, TConfig config)
 			where THost : Host<TConfig>
-			where TConfig : Config
+			where TConfig : HostConfig
 		{
 			host.Run(config);
 

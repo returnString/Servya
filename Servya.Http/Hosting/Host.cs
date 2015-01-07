@@ -3,7 +3,7 @@
 namespace Servya
 {
 	public class Host<TConfig>
-		where TConfig : Config
+		where TConfig : HostConfig
 	{
 		protected DependencyResolver Resolver { get; private set; }
 		protected Router Router { get; private set; }
