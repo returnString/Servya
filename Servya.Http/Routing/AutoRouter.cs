@@ -15,16 +15,18 @@ namespace Servya
 		private readonly Parser m_argParser;
 		private readonly DependencyResolver m_resolver;
 		private readonly CategoryLogger m_logger;
+		private readonly bool m_debug;
 
 		private static Type[] ExcludedFromCache = { typeof(void), typeof(Task) };
 
-		public AutoRouter(Router processor, Parser argParser, DependencyResolver resolver)
+		public AutoRouter(Router processor, Parser argParser, DependencyResolver resolver, bool debug)
 		{
 			m_logger = new CategoryLogger(this);
 			m_processor = processor;
 			m_taskResultLookup = new Dictionary<Type, PropertyInfo>();
 			m_argParser = argParser;
 			m_resolver = resolver;
+			m_debug = debug;
 
 			CacheResultProperty(typeof(Task<object>));
 		}
@@ -145,11 +147,7 @@ namespace Servya
 					m_logger.Error(ex);
 					response.Status = HttpStatusCode.InternalServerError;
 
-					#if DEBUG
-					var message = ex.ToString();
-					#else
-					var message = "Internal server error " + ex.HResult;
-					#endif
+					var message = m_debug ? ex.ToString() : "Internal server error";
 
 					var error = new RouteError(RouteErrorDomain.Invocation, message);
 					taskResult = routeAttr.HandleError(error);

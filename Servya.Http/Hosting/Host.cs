@@ -16,7 +16,7 @@ namespace Servya
 			Router = new Router();
 
 			PreServiceInit();
-			InitHttp(config.Http);
+			InitHttp();
 		}
 
 		protected virtual void PreServiceInit()
@@ -28,13 +28,15 @@ namespace Servya
 			return WebInterfaceConfig.Default;
 		}
 
-		private void InitHttp(HttpConfig config)
+		private void InitHttp()
 		{
-			var listener = new AsyncHttpListener(Router, port: config.Port, securePort: config.SecurePort);
-			var autoRouter = new AutoRouter(Router, new Parser(), Resolver);
+			var httpConfig = Config.Http;
+
+			var listener = new AsyncHttpListener(Router, port: httpConfig.Port, securePort: httpConfig.SecurePort);
+			var autoRouter = new AutoRouter(Router, new Parser(), Resolver, Config.Debug);
 			autoRouter.Discover();
 			autoRouter.CreateWebInterface(CreateInterfaceConfig());
-			listener.Start(() => new EventLoopContext(), Environment.ProcessorCount, config.MaxDelay);
+			listener.Start(() => new EventLoopContext(), Environment.ProcessorCount, httpConfig.MaxDelay);
 		}
 	}
 }
