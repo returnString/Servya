@@ -5,16 +5,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Servya", "Servya\Servya.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Servya.Http", "Servya.Http\Servya.Http.csproj", "{8D440E3F-3F48-4130-B65A-89263AEDBFC6}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{2DB606AA-9E52-46A6-B899-9CE6F8F5F0C4}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloWorld", "Samples\HelloWorld\HelloWorld.csproj", "{8D89D9FD-794E-46DB-8DCA-B6CD1FCA9B97}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccountBackend", "Samples\AccountBackend\AccountBackend.csproj", "{9157EA6F-5C72-433B-AC49-296263882F69}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LowLevel", "Samples\LowLevel\LowLevel.csproj", "{E28ED741-6321-4184-9936-BB1F38A1842F}"
-EndProject
-Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "Functional", "Samples\Functional\Functional.fsproj", "{CAAD3B55-8FD1-4491-A29A-C376D874B5BD}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,30 +19,5 @@ Global
 		{8D440E3F-3F48-4130-B65A-89263AEDBFC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8D440E3F-3F48-4130-B65A-89263AEDBFC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8D440E3F-3F48-4130-B65A-89263AEDBFC6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8D89D9FD-794E-46DB-8DCA-B6CD1FCA9B97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8D89D9FD-794E-46DB-8DCA-B6CD1FCA9B97}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8D89D9FD-794E-46DB-8DCA-B6CD1FCA9B97}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8D89D9FD-794E-46DB-8DCA-B6CD1FCA9B97}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9157EA6F-5C72-433B-AC49-296263882F69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9157EA6F-5C72-433B-AC49-296263882F69}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9157EA6F-5C72-433B-AC49-296263882F69}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9157EA6F-5C72-433B-AC49-296263882F69}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CAAD3B55-8FD1-4491-A29A-C376D874B5BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CAAD3B55-8FD1-4491-A29A-C376D874B5BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CAAD3B55-8FD1-4491-A29A-C376D874B5BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CAAD3B55-8FD1-4491-A29A-C376D874B5BD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E28ED741-6321-4184-9936-BB1F38A1842F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E28ED741-6321-4184-9936-BB1F38A1842F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E28ED741-6321-4184-9936-BB1F38A1842F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E28ED741-6321-4184-9936-BB1F38A1842F}.Release|Any CPU.Build.0 = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{8D89D9FD-794E-46DB-8DCA-B6CD1FCA9B97} = {2DB606AA-9E52-46A6-B899-9CE6F8F5F0C4}
-		{9157EA6F-5C72-433B-AC49-296263882F69} = {2DB606AA-9E52-46A6-B899-9CE6F8F5F0C4}
-		{E28ED741-6321-4184-9936-BB1F38A1842F} = {2DB606AA-9E52-46A6-B899-9CE6F8F5F0C4}
-		{CAAD3B55-8FD1-4491-A29A-C376D874B5BD} = {2DB606AA-9E52-46A6-B899-9CE6F8F5F0C4}
-	EndGlobalSection
-	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = Samples\AccountBackend\AccountBackend.csproj
 	EndGlobalSection
 EndGlobal
